@@ -25,13 +25,10 @@ function Header() {
 
   const [openDailog, setOpenDailog] = useState(false);
 
-  useEffect(() => {
-    console.log(user)
-  }, [])
 
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp),
-    onError: (error) => console.log(error)
+    onError: (error) => { }
   })
 
   const GetUserProfile = async (tokenInfo) => {
@@ -50,7 +47,7 @@ function Header() {
       setOpenDailog(false);
       window.location.reload();
     } catch (err) {
-      console.error("Google profile fetch failed", err);
+
     }
   };
 

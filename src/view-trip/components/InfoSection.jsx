@@ -14,7 +14,7 @@ function InfoSection({ trip }) {
     const data = {
       textQuery: trip?.userSelection?.location?.english || trip?.userSelection?.location?.label || trip?.userSelection?.location
     }
-    const result = await GetPlaceDetails(data).then(resp => {
+    await GetPlaceDetails(data).then(resp => {
       const photos = resp.data?.places?.[0]?.photos;
       if (photos && photos.length > 0) {
         const PhotoUrl = PHOTO_REF_URL.replace('{NAME}', photos[0].name);
@@ -23,28 +23,15 @@ function InfoSection({ trip }) {
     })
   }
 
-  // Debug: Log trip data structure
-  useEffect(() => {
-    if (trip) {
-      console.log('Full trip data:', trip);
-      console.log('UserSelection:', trip.userSelection);
-      console.log('Location:', trip.userSelection?.location);
-    }
-  }, [trip]);
-
   const handleShare = () => {
     const tripUrl = window.location.href;
 
-    // Get destination - location can be an object {english, arabic} or string
     const locationData = trip?.userSelection?.location;
     const destination = locationData?.english ||
       locationData?.label ||
       (typeof locationData === 'string' ? locationData : null) ||
       'Your Destination';
 
-    console.log('Sharing trip with destination:', destination, 'Full location object:', trip?.userSelection?.location);
-
-    // Build itinerary section
     let itineraryText = '';
     if (trip?.tripData?.itinerary && trip.tripData.itinerary.length > 0) {
       itineraryText = '\n\n📋 *Day-by-Day Itinerary:*\n';
@@ -52,8 +39,9 @@ function InfoSection({ trip }) {
       trip.tripData.itinerary.forEach((dayPlan, dayIndex) => {
         itineraryText += `\n*${dayPlan.day || `Day ${dayIndex + 1}`}*\n`;
 
-        if (dayPlan.plan && dayPlan.plan.length > 0) {
-          dayPlan.plan.forEach((place, placeIndex) => {
+        const places = dayPlan.plan || dayPlan.activities || [];
+        if (places.length > 0) {
+          places.forEach((place, placeIndex) => {
             itineraryText += `\n${placeIndex + 1}. *${place.placeName || 'Place'}*`;
             if (place.time) itineraryText += ` - ${place.time}`;
             if (place.placeDetails) itineraryText += `\n   📝 ${place.placeDetails}`;
@@ -90,6 +78,7 @@ function InfoSection({ trip }) {
           {trip?.tripData?.tripDetails?.duration || trip?.userSelection?.noOfDays} days
         </span>
       </h2>
+
       {photoUrl ? <img
         src={photoUrl}
         className="h-[340px] w-full object-cover rounded-xl"
