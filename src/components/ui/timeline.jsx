@@ -27,18 +27,7 @@ export const Timeline = ({ data, tripData }) => {
     <div
       className="w-full font-sans"
       ref={containerRef}>
-      <div className="py-20 px-4 md:px-8">
-        <h2 className="max-w-4xl text-center md:text-left text-3xl md:text-5xl font-extrabold tracking-tight mb-16 text-neutral-900 dark:text-white transition-colors">
-          Your trip to{" "}
-          <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 dark:from-yellow-200 dark:via-orange-400 dark:to-red-400 bg-clip-text text-transparent drop-shadow-sm">
-            {tripData?.tripDetails?.destinationEnglish}
-          </span>{" "}
-          is ready for{" "}
-          <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 dark:from-emerald-300 dark:to-cyan-400 bg-clip-text text-transparent">
-            {tripData?.tripDetails?.duration} days
-          </span>
-        </h2>
-
+      <div className="py-10 px-4 md:px-8">
         <div className="grid gap-4 md:grid-cols-2">
           {/* Destination */}
           <div className="flex items-center gap-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-md p-4 shadow-sm hover:shadow-md transition-all">

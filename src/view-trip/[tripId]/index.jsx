@@ -55,7 +55,7 @@ function Viewtrip() {
                     </div>
 
                     {/* Right Side: Sticky Itinerary */}
-                    <div className='md:sticky md:top-10 h-fit pb-10'>
+                    <div className='md:sticky md:top-28 h-[calc(100vh-140px)]'>
                         <Itinerary
                             trip={trip}
                             showMap={showMap}

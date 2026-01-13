@@ -188,13 +188,13 @@ const GlobalMap = ({ tripData, selectedLocation }) => {
         });
 
         if (hasCoords) {
-            map.current.fitBounds(bounds, { padding: 100, maxZoom: 1.5 });
+            map.current.fitBounds(bounds, { padding: 100, maxZoom: 1.3 });
         }
     }, [tripData, mapboxToken]);
 
     return (
-        <div className="w-full h-[95%] rounded-xl overflow-hidden relative">
-            <div ref={mapContainerRef} className="w-full h-full min-h-[500px]" />
+        <div className="w-full h-full rounded-xl overflow-hidden relative ">
+            <div ref={mapContainerRef} className="w-full h-full" />
         </div>
     )
 }

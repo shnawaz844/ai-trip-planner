@@ -80,6 +80,16 @@ function InfoSection({ trip }) {
 
   return (
     <div>
+      <h2 className="max-w-4xl text-center md:text-left text-2xl md:text-4xl font-extrabold tracking-tight mb-16 text-neutral-900 dark:text-white transition-colors">
+        Your trip to{" "}
+        <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 dark:from-yellow-200 dark:via-orange-400 dark:to-red-400 bg-clip-text text-transparent drop-shadow-sm">
+          {trip?.tripData?.tripDetails?.destinationEnglish || trip?.userSelection?.location?.english || trip?.userSelection?.location?.label || 'Your Destination'}
+        </span>{" "}
+        is ready for{" "}
+        <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 dark:from-emerald-300 dark:to-cyan-400 bg-clip-text text-transparent">
+          {trip?.tripData?.tripDetails?.duration || trip?.userSelection?.noOfDays} days
+        </span>
+      </h2>
       {photoUrl ? <img
         src={photoUrl}
         className="h-[340px] w-full object-cover rounded-xl"

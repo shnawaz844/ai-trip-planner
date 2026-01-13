@@ -257,15 +257,12 @@ function CreateTrip() {
 
       const result = await chatSession.sendMessage(FINAL_PROMPT);
       const responseText = result?.response?.text();
-      console.log('AI Response:', responseText);
 
       // Clean and parse the JSON response
       const cleanedJson = cleanJson(responseText);
-      console.log('Cleaned JSON length:', cleanedJson.length);
 
       try {
         const parsedData = JSON.parse(cleanedJson);
-        console.log('Parsed Trip Data:', parsedData);
 
         await SaveAiTrip(parsedData);
       } catch (parseError) {

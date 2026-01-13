@@ -194,18 +194,30 @@ export default function Itinerary({ trip, showMap, setShowMap, selectedLocation 
     }) || [];
 
     return (
-        <div id="itinerary-section" className="relative w-full h-[95vh] rounded-xl overflow-hidden bg-transparent">
-            <div className="absolute top-5 right-10 z-50">
+        <div id="itinerary-section" className="relative w-full h-full rounded-xl overflow-hidden bg-transparent">
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 z-50">
                 <button
                     onClick={() => setShowMap(!showMap)}
-                    className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-md border border-gray-100 text-purple-600 hover:scale-110 hover:bg-white transition-all active:scale-95"
+                    className="p-4 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md rounded-full shadow-2xl border border-neutral-200 dark:border-neutral-800 text-purple-600 dark:text-purple-400 hover:scale-110 hover:bg-white dark:hover:bg-neutral-800 transition-all active:scale-95 group"
                     title={showMap ? "Show List View" : "Show Map View"}
                 >
-                    {showMap ? <List size={22} /> : <Map size={22} />}
+                    <div className="flex items-center">
+                        {showMap ? (
+                            <>
+                                <List size={24} className="group-hover:rotate-12 transition-transform" />
+                                <span className="font-semibold text-sm"></span>
+                            </>
+                        ) : (
+                            <>
+                                <Map size={24} className="group-hover:rotate-12 transition-transform" />
+                                <span className="font-semibold text-sm"></span>
+                            </>
+                        )}
+                    </div>
                 </button>
             </div>
 
-            <div className="h-full overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className={`h-full ${showMap ? 'overflow-hidden' : 'overflow-auto'} [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
                 {showMap ? (
                     <GlobalMap tripData={trip} selectedLocation={selectedLocation} />
                 ) : (

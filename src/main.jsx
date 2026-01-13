@@ -10,23 +10,46 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import Viewtrip from './view-trip/[tripId]/index.jsx'
 import { ThemeProvider } from './components/custom/ThemeProvider.jsx'
 import MyTrips from './my-trips/index.jsx'
+import ScrollToTop from './components/custom/ScrollToTop.jsx'
+
+const Root = () => (
+  <>
+    <ScrollToTop />
+    <App />
+  </>
+)
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <Root />
   },
   {
     path: '/create-trip',
-    element: <CreateTrip />
+    element: (
+      <>
+        <ScrollToTop />
+        <CreateTrip />
+      </>
+    )
   },
   {
     path: '/view-trip/:tripId',
-    element: <Viewtrip />
+    element: (
+      <>
+        <ScrollToTop />
+        <Viewtrip />
+      </>
+    )
   },
   {
     path: '/my-trips',
-    element: <MyTrips />
+    element: (
+      <>
+        <ScrollToTop />
+        <MyTrips />
+      </>
+    )
   }
 ])
 
