@@ -292,18 +292,13 @@ function CreateTrip() {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
       const docId = Date.now().toString();
 
-      // const cleaned = cleanJson(TripData);
-      // console.log("Cleaned AI JSON:", cleaned);
-
-      // const parsedTrip = JSON.parse(cleaned);
-
       await setDoc(doc(db, "AITrips", docId), {
         userSelection: {
           ...formData,
-          location: selectedCity
+          location: formData?.location || selectedCity
         },
         tripData: TripData,
-        userEmail: user?.email || 'guest@tripplanner.com', // Allow guest users
+        userEmail: user?.email || 'guest@tripplanner.com',
         id: docId
       });
 
